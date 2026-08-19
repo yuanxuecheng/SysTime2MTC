@@ -28,7 +28,7 @@ jobs:
             --name "SysTime2MTC" \
             --icon "assets/icon.icns" \
             --hidden-import=rtmidi \
-            SysTime2MTC.py
+            src/SysTime2MTC.py
 
       - name: Sign App
         run: codesign --force --deep --sign - "dist/SysTime2MTC.app"
