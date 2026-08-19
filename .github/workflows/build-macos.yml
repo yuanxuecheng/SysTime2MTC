@@ -25,36 +25,36 @@ jobs:
         run: |
           pyinstaller \
             --windowed \
-            --name "LouDuck MTC Sync" \
+            --name "SysTime2MTC" \
             --icon "assets/icon.icns" \
             --hidden-import=rtmidi \
             mtc_sync_app.py
 
       - name: Sign App
-        run: codesign --force --deep --sign - "dist/LouDuck MTC Sync.app"
+        run: codesign --force --deep --sign - "dist/SysTime2MTC.app"
 
       - name: Create DMG
         run: |
           brew install create-dmg || true
           create-dmg \
-            --volname "LouDuck MTC Sync" \
+            --volname "SysTime2MTC" \
             --window-pos 200 120 \
             --window-size 600 400 \
             --icon-size 100 \
             --app-drop-link 450 185 \
-            "LouDuck-MTC-Sync.dmg" \
-            "dist/LouDuck MTC Sync.app"
+            "SysTime2MTC.dmg" \
+            "dist/SysTime2MTC.app"
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: LouDuck-MTC-Sync-macOS
-          path: LouDuck-MTC-Sync.dmg
+          name: SysTime2MTC-macOS
+          path: SysTime2MTC.dmg
 
       - name: Release
         if: startsWith(github.ref, 'refs/tags/')
         uses: softprops/action-gh-release@v2
         with:
-          files: LouDuck-MTC-Sync.dmg
+          files: SysTime2MTC.dmg
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
